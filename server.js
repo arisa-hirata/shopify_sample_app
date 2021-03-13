@@ -74,6 +74,11 @@ app.prepare().then(() => {
     ctx.res.statusCode = 200;
   };
 
+  router.post('/webhooks', async (ctx) => {
+    await Shopify.Webhooks.Registry.process(ctx.req, ctx.res);
+    console.log(`Webhook processed with status code 200`);
+  });
+
   router.get("/", async (ctx) => {
     const shop = ctx.query.shop;
 
